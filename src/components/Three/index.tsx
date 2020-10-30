@@ -1,22 +1,45 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame, useThree } from 'react-three-fiber';
-import { TextureLoader, sRGBEncoding, EquirectangularReflectionMapping } from 'three';
-import { RectAreaLightUniformsLib } from 'three/examples/jsm/lights/RectAreaLightUniformsLib.js';
+import React, { Suspense, useState } from 'react';
+import { Canvas, useFrame } from 'react-three-fiber';
 import CameraControls from './CameraControls';
-import { Box, Plane, Floor, CustomLight } from './Objects';
+import RocketShip from './RocketShip';
 import { SkyBox } from './Stage';
+import { Box } from './Objects';
+import Particles from './Particles';
 
-RectAreaLightUniformsLib.init();
+function Loading() {
+  return (
+    <mesh visible position={[0, 0, 0]} rotation={[0, 0, 0]}>
+      <sphereGeometry attach="geometry" args={[1, 16, 16]} />
+      <meshStandardMaterial
+        attach="material"
+        color="white"
+        transparent
+        opacity={0.6}
+        roughness={1}
+        metalness={0}
+      />
+    </mesh>
+  );
+};
 
 const Three = () => {
   return (
-    <Canvas camera={{ position: [20, 20, -40] }}>
+    <Canvas camera={{ position: [-203, 34, 110] }}>
+      <ambientLight intensity={10} />
       <CameraControls />
-      <CustomLight position={[0, 5, 0]}/>
-      <Floor />
-      <ambientLight intensity={3}/>
+      <SkyBox />
+      <Particles />
+      <Suspense fallback={<Loading />}>
+        <RocketShip />
+      </Suspense>
     </Canvas>
   );
 };
 
 export default Three;
+
+/*
+<Suspense fallback={<Loading />}>
+        <RocketShip />
+      </Suspense>
+      */

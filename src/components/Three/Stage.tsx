@@ -1,6 +1,6 @@
 import { useThree } from 'react-three-fiber';
 import { TextureLoader, sRGBEncoding, EquirectangularReflectionMapping } from 'three';
-import hdrmap from '../../assets/secluded_beach.jpg';
+import hdrmap from '../../assets/hdr5.png';
 
 export const SkyBox = () => {
   const { scene } = useThree();

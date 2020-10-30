@@ -10,7 +10,7 @@ import {
 } from 'three';
 import * as THREE from 'three';
 
-export const Box = (props: any) => {
+export const NotBox = (props: any) => {
   const mesh: any = useRef();
   const [active, setActive] = useState(false);
   const { scene, gl } = useThree();
@@ -38,12 +38,25 @@ export const Box = (props: any) => {
       scale={active ? [1.5, 1.5, 1.5] : [1, 1, 1]}
       onClick={() => setActive(!active)}
     >
-      <directionalLight intensity={0.5}/>
       <sphereGeometry attach="geometry" args={[2, 32, 32]} />
       <meshStandardMaterial
         attach="material"
         color="white"
         envMap={cubeCamera.renderTarget.texture}
+        metalness={1}
+        roughness={0.1}
+      />
+    </mesh>
+  );
+};
+
+export const Box = () => {
+  return (
+    <mesh position={[0, 0, 0]} scale={[30, 5, 0.5]}>
+      <boxBufferGeometry attach="geometry" args={[2, 32, 32]} />
+      <meshStandardMaterial
+        attach="material"
+        color="white"
         metalness={1}
         roughness={0.1}
       />
@@ -77,13 +90,19 @@ export const CustomLight = ({ position }: any) => {
     mesh.current.scale.x += 0.005;
     mesh.current.rotation.x += 0.001;
     light.current.width = mesh.current.scale.x;
-  })
+  });
 
   return (
     <mesh ref={mesh} scale={[30, 30, 1]} rotation={[-1, 0, 0]}>
-      <rectAreaLight color={0xFFFFFF} intensity={2} width={30} height={30} ref={light} />
+      <rectAreaLight
+        color={0xffffff}
+        intensity={2}
+        width={30}
+        height={30}
+        ref={light}
+      />
       <planeBufferGeometry />
-      <meshStandardMaterial color={0xFFFFFF} side={THREE.DoubleSide} />
+      <meshStandardMaterial color={0xffffff} side={THREE.DoubleSide} />
     </mesh>
   );
-}
+};

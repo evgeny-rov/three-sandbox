@@ -14,12 +14,16 @@ extend({ OrbitControls });
 
 const CameraControls = () => {
   const { camera, gl: { domElement } } = useThree();
+  const controls: any = useRef<OrbitControls>();
 
-  const controls: any = useRef();
-  useFrame(() => controls.current.update());
+  useFrame(() => {
+    controls.current?.update()
+  });
 
   return (
     <orbitControls 
+      autoRotate
+      autoRotateSpeed={0.3}
       ref={controls}
       args={[camera, domElement]}
     />
