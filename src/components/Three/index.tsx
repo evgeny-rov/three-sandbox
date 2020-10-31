@@ -22,10 +22,11 @@ function Loading() {
   );
 };
 
+const defaultCameraAngle = [-203, 34, 110];
+
 const Three = () => {
   return (
-    <Canvas camera={{ position: [-203, 34, 110] }}>
-      <ambientLight intensity={10} />
+    <Canvas camera={{ position: [0, -250, -100], up: [0, 0, 1]}}>
       <CameraControls />
       <SkyBox />
       <Particles />
@@ -37,9 +38,3 @@ const Three = () => {
 };
 
 export default Three;
-
-/*
-<Suspense fallback={<Loading />}>
-        <RocketShip />
-      </Suspense>
-      */

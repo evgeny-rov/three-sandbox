@@ -14,7 +14,7 @@ extend({ OrbitControls });
 
 const CameraControls = () => {
   const { camera, gl: { domElement } } = useThree();
-  const controls: any = useRef<OrbitControls>();
+  const controls = useRef<OrbitControls>();
 
   useFrame(() => {
     controls.current?.update()
