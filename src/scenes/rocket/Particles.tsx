@@ -9,7 +9,7 @@ const getNextPos = () => {
   return [x, y, z];
 }
 
-const Particle = () => {
+const MovingParticle = () => {
   const meshRef = useRef<Object3D>();
   const speed = (Math.random() * 20) + 5;
   
@@ -36,14 +36,4 @@ const Particle = () => {
   );
 };
 
-export default () => {
-  return (
-    <>
-     <Particle />
-     <Particle />
-     <Particle />
-     <Particle />
-     <Particle />
-    </>
-  );
-};
+export default MovingParticle;
